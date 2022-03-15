@@ -50,7 +50,7 @@ type HandlerOptions struct {
 	// Algorand node client.
 	AlgoNode *algod.Client
 
-	// Algorand indexter client.
+	// Algorand indexer client.
 	AlgoIndexer *indexer.Client
 }
 
@@ -156,7 +156,7 @@ func (h *Handler) Process(req *protov1.ProcessRequest) (string, error) {
 func (h *Handler) AccountInformation(
 	ctx context.Context,
 	req *protov1.AccountInformationRequest) (*protov1.AccountInformationResponse, error) {
-	info, err := h.algoNode.AccountInformation(req.Address).Do(ctx)
+	ai, err := h.algoNode.AccountInformation(req.Address).Do(ctx)
 	if err != nil {
 		h.oop.WithFields(xlog.Fields{
 			"error":   err.Error(),
@@ -173,10 +173,10 @@ func (h *Handler) AccountInformation(
 		return nil, err
 	}
 	resp := &protov1.AccountInformationResponse{
-		Status:              info.Status,
-		Balance:             info.AmountWithoutPendingRewards,
-		TotalRewards:        info.Rewards,
-		PendingRewards:      info.PendingRewards,
+		Status:              ai.Status,
+		Balance:             ai.AmountWithoutPendingRewards,
+		TotalRewards:        ai.Rewards,
+		PendingRewards:      ai.PendingRewards,
 		PendingTransactions: []*protov1.AlgoTransaction{},
 	}
 	for _, pt := range ptList {
@@ -257,7 +257,7 @@ func (h *Handler) TxSubmit(ctx context.Context, req *protov1.TxSubmitRequest) (*
 	return &protov1.TxSubmitResponse{Id: tid}, nil
 }
 
-// ServiceDefinition allows the handler instance to be exposed using a RPC server
+// ServiceDefinition allows the handler instance to be exposed using an RPC server
 func (h *Handler) ServiceDefinition() *rpc.Service {
 	return &rpc.Service{
 		GatewaySetup: protov1.RegisterAgentAPIHandlerFromEndpoint,

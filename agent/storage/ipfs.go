@@ -27,7 +27,7 @@ type IPFS struct {
 	index string
 }
 
-// Open a connection with provided IPFS deamon instance.
+// Open a connection with provided IPFS daemon instance.
 func (c *IPFS) Open(addr string) error {
 	sh := ipfs.NewShell(addr)
 	_, _, err := sh.Version()
@@ -136,7 +136,7 @@ func (c *IPFS) Save(id *did.Identifier, proof *did.ProofLD) (string, error) {
 }
 
 // Delete any existing records for the given DID instance.
-func (c *IPFS) Delete(id *did.Identifier) error {
+func (c *IPFS) Delete(_ *did.Identifier) error {
 	return errors.New("IPFS entries cannot be removed")
 }
 

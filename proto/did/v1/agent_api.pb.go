@@ -554,7 +554,7 @@ func (x *QueryResponse) GetProof() []byte {
 	return nil
 }
 
-// Request information about a given cyrpto account.
+// Request information about a given crypto account.
 type AccountInformationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

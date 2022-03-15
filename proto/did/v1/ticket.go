@@ -19,7 +19,7 @@ const defaultTicketDifficultyLevel = 24
 
 // NewTicket returns a properly initialized new ticket instance
 func NewTicket(id *did.Identifier, keyID string) (*Ticket, error) {
-	// Get safe DID contents
+	// Get safe DID document
 	contents, err := json.Marshal(id.Document(true))
 	if err != nil {
 		return nil, err

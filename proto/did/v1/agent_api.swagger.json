@@ -277,7 +277,7 @@
           "description": "Account address."
         }
       },
-      "description": "Request information about a given cyrpto account."
+      "description": "Request information about a given crypto account."
     },
     "v1AccountInformationResponse": {
       "type": "object",

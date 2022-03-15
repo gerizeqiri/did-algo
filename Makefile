@@ -97,8 +97,8 @@ lint:
 	# Helm charts
 	helm lint helm/*
 
-## proto: Compile all protobuf definitions and RPC services
-proto:
+## protos: Compile all protobuf definitions and RPC services
+protos:
 	# Verify PB definitions
 	make proto-test
 
@@ -123,7 +123,6 @@ proto:
 	gofmt -s -w proto/did/v1
 	goimports -w proto/did/v1
 
-## proto-test: Verify protobuf definitions
 proto-test:
 	# Verify style and consistency
 	$(buf) lint --path proto/did/v1

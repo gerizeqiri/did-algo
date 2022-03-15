@@ -33,13 +33,13 @@ func init() {
 			ByDefault: "master",
 			Short:     "k",
 		},
-		// {
-		// 	Name:      "deactivate",
-		// 	Usage:     "instruct the network agent to deactivate the identifier",
-		// 	FlagKey:   "sync.deactivate",
-		// 	ByDefault: false,
-		// 	Short:     "d",
-		// },
+		{
+			Name:      "deactivate",
+			Usage:     "instruct the network agent to deactivate the identifier",
+			FlagKey:   "sync.deactivate",
+			ByDefault: false,
+			Short:     "d",
+		},
 		{
 			Name:      "pow",
 			Usage:     "set the required request ticket difficulty level",
@@ -100,9 +100,9 @@ func runSyncCmd(_ *cobra.Command, args []string) error {
 		Task:   protov1.ProcessRequest_TASK_PUBLISH,
 		Ticket: ticket,
 	}
-	// if viper.GetBool("sync.deactivate") {
-	// 	req.Task = protov1.ProcessRequest_TASK_DEACTIVATE
-	// }
+	if viper.GetBool("sync.deactivate") {
+		req.Task = protov1.ProcessRequest_TASK_DEACTIVATE
+	}
 
 	// Submit request
 	log.Info("submitting request to the network")
